@@ -1,8 +1,8 @@
 # Library emails-input
 
 # Component multiple emails
-    instance componente <emails-input></emails-input>
-    add in the HTML the tag script <script type="text/javascript" src="./main.js"></script>
+    Instance component <emails-input></emails-input>
+    Add in the HTML the tag script <script type="text/javascript" src="./main.js"></script>
 
 # Development
 
