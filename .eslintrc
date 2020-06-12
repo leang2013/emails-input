@@ -1,0 +1,12 @@
+{
+  "extends": "airbnb-base",
+    "globals": {
+      "describe": true,
+      "it": true
+    },
+      "env": {
+        "browser": true,
+        "jest": true
+      }
+  }
+  

@@ -1,0 +1,148 @@
+@import url(https://fonts.googleapis.com/css?family=Open+Sans:400,800);
+@charset "UTF-8";
+.EmailsInput {
+  background: #FFFFFF;
+  -webkit-box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.2);
+          box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.2);
+  height: 300px;
+  width: 540px;
+  margin: 0 auto;
+  display: block; }
+
+.EmailsInput .content {
+  background: #F8F8F7;
+  text-align: left;
+  display: inline-block;
+  padding: 32px 50px 24px 50px;
+  width: 440px;
+  border-radius: 8px; }
+
+.EmailsInput .action {
+  background: #FFFFFF;
+  padding-left: 50px;
+  padding: 24px 0px 32px 50px;
+  border-radius: 8px; }
+
+.EmailsInput button {
+  display: inline-block;
+  background: #4262FF;
+  font-size: 14px;
+  line-height: 24px;
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 100;
+  color: white;
+  margin-right: 16px;
+  padding: 8px 16px 8px 16px;
+  border-radius: 6px;
+  overflow: hidden;
+  border: 0;
+  cursor: pointer;
+  letter-spacing: 0.05em;
+  float: left; }
+
+.EmailsInput label {
+  font-family: 'Open Sans', sans-serif;
+  font-style: normal;
+  font-weight: 100;
+  font-size: 20px;
+  line-height: 27px;
+  color: #050038;
+  float: left; }
+
+.EmailsInput input {
+  float: left;
+  border: none;
+  background-image: none;
+  background-color: transparent;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+  outline: none;
+  line-height: 24px;
+  margin-right: 8px;
+  margin-top: 4px; }
+
+.EmailsInput input::-webkit-input-placeholder {
+  font-family: 'Open Sans', sans-serif;
+  font-size: 14px;
+  font-weight: 100;
+  color: #C3C2CF; }
+
+.EmailsInput input::-moz-placeholder {
+  font-family: 'Open Sans', sans-serif;
+  font-size: 14px;
+  font-weight: 100;
+  color: #C3C2CF; }
+
+.EmailsInput input:-ms-input-placeholder {
+  font-family: 'Open Sans', sans-serif;
+  font-size: 14px;
+  font-weight: 100;
+  color: #C3C2CF; }
+
+.EmailsInput input::-ms-input-placeholder {
+  font-family: 'Open Sans', sans-serif;
+  font-size: 14px;
+  font-weight: 100;
+  color: #C3C2CF; }
+
+.EmailsInput input::placeholder {
+  font-family: 'Open Sans', sans-serif;
+  font-size: 14px;
+  font-weight: 100;
+  color: #C3C2CF; }
+
+.EmailsInput .multipleEmails {
+  margin-top: 24px;
+  width: 100%;
+  height: 96px;
+  border: 1px solid #C3C2CF;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  border-radius: 4px;
+  background: white;
+  display: inline-block;
+  overflow-y: scroll;
+  padding: 8px 7px 7px 8px; }
+
+.EmailsInput .listEmails {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  float: left; }
+
+.EmailsInput .pill {
+  background: rgba(102, 153, 255, 0.2);
+  border-radius: 100px;
+  padding: 10px;
+  padding: 0px 8px 0px 10px;
+  line-height: 24px;
+  color: #050038;
+  margin-right: 8px;
+  margin-top: 4px;
+  float: left; }
+
+.EmailsInput .pill.invalid {
+  background: white; }
+
+.EmailsInput .pill.invalid .close {
+  border-bottom: 1px dashed #D92929; }
+
+.EmailsInput .pill {
+  font-family: 'Open Sans', sans-serif;
+  font-size: 14px;
+  font-weight: 100; }
+
+.EmailsInput .counter {
+  font-family: 'Open Sans', sans-serif;
+  font-size: 14px;
+  font-weight: 100;
+  padding: 10px;
+  float: left; }
+
+.EmailsInput .pill .close {
+  cursor: pointer; }
+
+.EmailsInput .pill .close::after {
+  content: "\D7";
+  padding-left: 8px; }
+
