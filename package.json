@@ -13,7 +13,6 @@
     "start": "node server.js",
     "lint": "eslint '**/*.js' --ignore-pattern node_modules/",
     "lint:fix": "eslint --fix --ext .js,.jsx .",
-    "prepush": "npm test",
     "watch": "webpack --watch --mode=development",
     "build": "webpack --mode=production --optimize-minimize",
     "build:dev": "webpack --mode=development"
@@ -42,7 +41,6 @@
     "eslint-config-airbnb-base": "^13.2.0",
     "eslint-plugin-import": "^2.18.0",
     "extract-text-webpack-plugin": "^4.0.0-beta.0",
-    "husky": "^3.0.0",
     "istanbul": "^0.4.5",
     "mini-css-extract-plugin": "^0.9.0",
     "mocha": "^6.1.4",
