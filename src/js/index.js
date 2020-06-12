@@ -8,7 +8,7 @@ class EmailsInput extends HTMLElement {
 
   addStyle() {
     const styleTag = document.createElement('style');
-    styleTag.textContent = '@import "http://emails-input.now.sh/style.css"';
+    styleTag.textContent = '@import "https://emails-input.now.sh/style.css"';
     this.shadowRoot.appendChild(styleTag);
   }
 
