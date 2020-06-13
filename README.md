@@ -25,6 +25,7 @@
       You can add a lot of them
       
         Demo Page: https://leang2013.github.io/emails-input/dist/index-es6.html
+        
  # Old Browsers
       
       For old browsers with not support HTMLElement you can
