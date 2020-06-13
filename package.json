@@ -13,6 +13,8 @@
     "start": "node server.js",
     "lint": "eslint '**/*.js' --ignore-pattern node_modules/",
     "lint:fix": "eslint --fix --ext .js,.jsx .",
+    "lintsass": "sass-lint -v",
+    "lintsass:fix": "sass-lint-auto-fix",
     "watch": "webpack --watch --mode=development",
     "build": "webpack --mode=production --optimize-minimize",
     "build:dev": "webpack --mode=development"
@@ -21,6 +23,7 @@
     "babel-preset-env": "^1.7.0",
     "express": "^4.17.1"
   },
+  "sasslintConfig": ".sasslintrc.json",
   "browserslist": [
     "defaults",
     "not ie < 11",
@@ -49,6 +52,8 @@
     "path": "^0.12.7",
     "postcss-loader": "^3.0.0",
     "precss": "^4.0.0",
+    "sass-lint": "^1.13.1",
+    "sass-lint-auto-fix": "^0.21.0",
     "sass-loader": "^6.0.7",
     "style-loader": "^0.20.3",
     "webpack": "4.19.0",

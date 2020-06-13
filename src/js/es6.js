@@ -1,17 +1,16 @@
+import URL_CSS from '../config/index';
+
 class EmailsInput extends HTMLElement {
   connectedCallback() {
     this.attachShadow({ mode: 'open' });
-    this.text = this.getAttribute('text');
-    this.size = this.getAttribute('font-size');
     this.render();
   }
 
   addStyle() {
     const styleTag = document.createElement('style');
-    styleTag.textContent = '@import "https://emails-input.now.sh/style.css"';
+    styleTag.textContent = `@import "${URL_CSS.style}"`;
     this.shadowRoot.appendChild(styleTag);
   }
-
 
   checkEmail(email) {
     const self = this;
@@ -28,7 +27,7 @@ class EmailsInput extends HTMLElement {
     const span = document.createElement('span');
     span.innerText = value;
     a.appendChild(span);
-    a.addEventListener('click', this.removePill);
+    a.addEventListener('click', event => this.removePill(event));
     pill.appendChild(a);
 
     if (value !== 'invalid.email') pill.classList.add('valid');
@@ -42,28 +41,32 @@ class EmailsInput extends HTMLElement {
     const self = this;
     const { target } = event;
     const { tagName } = event.target;
-
     if (tagName === 'SPAN') target.parentElement.parentNode.remove();
 
     if (tagName === 'A') target.parentElement.remove();
   }
 
   addEmail(event) {
-    const self = this;
     const listEmails = [];
     const container = event.target.parentElement.parentElement;
     const content = container.getElementsByClassName('content')[0];
-    const emails = content.getElementsByClassName('multipleEmails')[0];
+    const emails = content.getElementsByClassName('multiple-emails')[0];
     const pills = emails.getElementsByClassName('pill');
-    for (const pill of pills) {
-      const text = pill.textContent;
-      if (text && text !== 'invalid.email') listEmails.push(pill);
+    const input = emails.getElementsByTagName('input')[0];
+    const lengthPills = pills.length;
+    for (let i = 0; i < lengthPills; i++) {
+      const text = pills[i].textContent;
+      if (text && text !== 'invalid.email') listEmails.push(pills[i]);
     }
     const indexRandom = Math.floor(Math.random() * listEmails.length);
-    const newEmail = listEmails[indexRandom].cloneNode(true);
-    const element = pills[pills.length - 1];
-    element.classList.add('random');
-    element.after(newEmail);
+    if (listEmails[indexRandom]) {
+      const newEmail = listEmails[indexRandom].cloneNode(true);
+      newEmail.getElementsByTagName('a')[0].addEventListener('click', e => this.removePill(e));
+      const element = pills[pills.length - 1];
+      element.classList.add('random');
+      element.after(newEmail);
+      input.scrollIntoView({ behavior: 'smooth', block: 'center', inline: 'start' });
+    }
   }
 
   getEmailsCount(event) {
@@ -71,7 +74,7 @@ class EmailsInput extends HTMLElement {
     const container = event.target.parentElement.parentElement;
     const content = container.getElementsByClassName('content')[0];
     const action = container.getElementsByClassName('action')[0];
-    const emails = content.getElementsByClassName('multipleEmails')[0];
+    const emails = content.getElementsByClassName('multiple-emails')[0];
     const pillsValids = emails.getElementsByClassName('pill valid');
 
     const isExistCounter = action.getElementsByClassName('counter')[0];
@@ -86,14 +89,17 @@ class EmailsInput extends HTMLElement {
   }
 
   addEmailsFormatted(values, multipleEmails) {
-    const emails = values.split(',');
+    const emails = values.split(',').filter(email => email);
+    const lengthEmails = emails.length;
     const element = multipleEmails.getElementsByTagName('input')[0];
-    for (const email in emails) {
-      const emailText = emails[email].trim().toLowerCase();
+    for (let i = 0; i < lengthEmails; i++) {
+      const emailText = emails[i].trim().toLowerCase();
       if (this.checkEmail(emailText)) {
         element.before(this.createElementEmail(emailText));
+        element.scrollIntoView({ behavior: 'smooth', block: 'center', inline: 'start' });
       } else {
         element.before(this.createElementEmail('invalid.email'));
+        element.scrollIntoView({ behavior: 'smooth', block: 'center', inline: 'start' });
       }
     }
   }
@@ -136,19 +142,19 @@ class EmailsInput extends HTMLElement {
     const paragraph = document.createElement('label');
     const input = document.createElement('input');
     const multipleEmails = document.createElement('div');
-    multipleEmails.className = 'multipleEmails';
+    multipleEmails.className = 'multiple-emails';
     input.setAttribute('type', 'email');
     input.setAttribute('id', 'emailinput');
     input.setAttribute('placeholder', 'add more people…');
     this.addEventsInput(input, multipleEmails);
     action.className = 'action';
     content.className = 'content';
-    paragraph.innerHTML = 'Share <b>Board name</b> with others';
+    paragraph.innerHTML = 'Share <span>Board name</span> with others';
     button.innerText = 'Add email';
     const buttonEmails = document.createElement('button');
     buttonEmails.innerText = 'Get emails count';
-    buttonEmails.addEventListener('click', this.getEmailsCount);
-    button.addEventListener('click', this.addEmail);
+    buttonEmails.addEventListener('click', event => this.getEmailsCount(event));
+    button.addEventListener('click', event => this.addEmail(event));
     content.appendChild(paragraph);
     multipleEmails.appendChild(input);
     content.appendChild(multipleEmails);
@@ -156,7 +162,7 @@ class EmailsInput extends HTMLElement {
     action.appendChild(buttonEmails);
     div.appendChild(content);
     div.appendChild(action);
-    div.classList.add('EmailsInput');
+    div.classList.add('emails-input');
     this.shadowRoot.appendChild(div);
     this.addStyle();
   }
