@@ -1,9 +1,5 @@
 # Library emails-input
 
-# Component multiple emails
-    Instance component <emails-input></emails-input>
-    Add in the HTML the tag script <script type="text/javascript" src="./main.js"></script>
-
 # Development
 
     1 - npm run start (Run app)
@@ -12,9 +8,22 @@
    
  # Improvements
 
-    1 - Modules scss
-    2 - Modules js
-    3 - Testing
-    4 - Documentation
-    5 - Various demo pages
-    6 - Performance
+    1 - Testing
+    2 - Build with webpack
+    3 - CDN
+    4 - Performance
+    5 - NPM publish
+    
+    
+ # Documentation
+      For new browsers with support HTMLElement you can
+      Include this script <script type="text/javascript" src="./emails-input-es6.js"></script>
+      In your HTML you only with the tag intance the component <emails-input></emails-input>
+      You can add a lot of them
+      
+      For old browsers with not support HTMLElement you can
+      Include this script <script type="text/javascript" src="../src/js/es5.js"></script>
+      In your HTML you need to do this for example:
+          var inputContainerNode = document.querySelector('#emails-input');
+          var emailsInput = EmailsInput(inputContainerNode);
+      
