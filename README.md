@@ -17,10 +17,14 @@
     
  # Documentation
  
+ # New Browsers
+ 
       For new browsers with support HTMLElement you can
       Include this script <script type="text/javascript" src="./emails-input-es6.js"></script>
       In your HTML you only with the tag intance the component <emails-input></emails-input>
       You can add a lot of them
+  
+ # Old Browsers
       
       For old browsers with not support HTMLElement you can
       Include this script <script type="text/javascript" src="../src/js/es5.js"></script>
