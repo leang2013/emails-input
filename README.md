@@ -16,6 +16,7 @@
     
     
  # Documentation
+ 
       For new browsers with support HTMLElement you can
       Include this script <script type="text/javascript" src="./emails-input-es6.js"></script>
       In your HTML you only with the tag intance the component <emails-input></emails-input>
