@@ -1,29 +1,36 @@
 const path = require('path');
-const webpack = require('webpack');
 const autoprefixer = require('autoprefixer');
-const precss = require('precss');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 const outputDir = './dist';
-const entry = './src/index.js';
-const excludeFolder = './demo';
 
 module.exports = () => [{
-  entry,
+  entry: {
+    es5: './src/ES5.js',
+    es6: './src/ES6.js',
+  },
   output: {
     path: path.join(__dirname, outputDir),
-    filename: '[name].js',
+    filename: 'emails-input-[name].js',
     publicPath: '/dist/',
   },
   devtool: 'eval-source-map',
   module: {
     rules: [
       {
-        test: /\.js$/,
+        test: /\s5|ES5\.js$/,
+        use: {
+          loader: 'babel-loader',
+          options: {
+            presets: ['es2015'],
+          },
+        },
+      },
+      {
+        test: /\s6|ES6\.js$/,
         use: {
           loader: 'babel-loader',
         },
-        exclude: [excludeFolder],
       },
       {
         test: /\.(sa|sc|c)ss$/,
