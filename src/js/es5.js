@@ -1,7 +1,4 @@
 /* eslint-disable */
-
-import URL_CSS from '../config/index';
-
 (function (window) {
  
   function EmailsInput(nodes) {
@@ -10,7 +7,7 @@ import URL_CSS from '../config/index';
 
   EmailsInput.addStyle = function(parent) {
     var styleTag = document.createElement('style');
-    var url = '@import "' + URL_CSS.style + '"';
+    var url = '@import "' + '../dist/style.css' + '"';
     styleTag.textContent = url;
     parent.appendChild(styleTag);
   }
@@ -30,7 +27,7 @@ import URL_CSS from '../config/index';
     var span = document.createElement('span');
     span.innerText = value;
     a.appendChild(span);
-    a.addEventListener('click', event => this.removePill(event));
+    a.addEventListener('click', function(event){ EmailsInput.removePill(event)});
     pill.appendChild(a);
 
     if (value !== 'invalid.email') pill.classList.add('valid');
@@ -44,9 +41,17 @@ import URL_CSS from '../config/index';
     var self = this;
     var target = event.target;
     var tagName = event.target.tagName;
-    if (tagName === 'SPAN') target.parentElement.parentNode.remove();
+    if (tagName === 'SPAN'){
+      var child = target.parentElement.parentNode;
+      var parent = target.parentElement.parentNode.parentNode; 
+      parent.removeChild(child);
+    }
 
-    if (tagName === 'A') target.parentElement.remove();
+    if (tagName === 'A'){
+      var child = target.parentElement;
+      var parent = target.parentElement.parentNode;
+      parent.removeChild(child);
+    }
   }
 
   EmailsInput.addEmail = function(event) {
@@ -64,10 +69,11 @@ import URL_CSS from '../config/index';
     var indexRandom = Math.floor(Math.random() * listEmails.length);
     if (listEmails[indexRandom]) {
       var newEmail = listEmails[indexRandom].cloneNode(true);
-      newEmail.getElementsByTagName('a')[0].addEventListener('click', e => this.removePill(e));
+      newEmail.getElementsByTagName('a')[0].addEventListener('click', function(e){ EmailsInput.removePill(e)});
       var element = pills[pills.length - 1];
-      element.className += 'random';
-      element.after(newEmail);
+      element.classList.add('random');
+      var parent = element.parentNode;
+      parent.insertBefore(newEmail, element.nextSibling);
       if(input.scrollIntoView){
       input.scrollIntoView({ behavior: 'smooth', block: 'center', inline: 'start' });
       }
@@ -83,29 +89,31 @@ import URL_CSS from '../config/index';
     var pillsValids = emails.getElementsByClassName('pill valid');
 
     var isExistCounter = action.getElementsByClassName('counter')[0];
+
     if (isExistCounter) {
-      isExistCounter.innerText = `Valid emails count : ${pillsValids.length}`;
+      isExistCounter.innerText = 'Valid emails count : '+ pillsValids.length;
     } else {
       var counter = document.createElement('div');
       counter.className = 'counter';
-      counter.innerText = `Valid emails count : ${pillsValids.length}`;
+      counter.innerText = 'Valid emails count : '+ pillsValids.length;
       action.appendChild(counter);
     }
   }
 
   EmailsInput.addEmailsFormatted = function(values,multipleEmails) {
-    var emails = values.split(',').filter(email => email);
+    var emails = values.split(',').filter(function(email){ return email});
     var lengthEmails = emails.length;
     var element = multipleEmails.getElementsByTagName('input')[0];
+    var parent = element.parentNode;
     for (let i = 0; i < lengthEmails; i++) {
       var emailText = emails[i].trim().toLowerCase();
-      if (this.checkEmail(emailText)) {
-        element.before(this.createElementEmail(emailText));
+      if (EmailsInput.checkEmail(emailText)) {
+        parent.insertBefore(EmailsInput.createElementEmail(emailText), element);
         if(element.scrollIntoView){
         element.scrollIntoView({ behavior: 'smooth', block: 'center', inline: 'start' });
         }
       } else {
-        element.before(this.createElementEmail('invalid.email'));
+        parent.insertBefore(EmailsInput.createElementEmail('invalid.email'), element);
         if(element.scrollIntoView){
         element.scrollIntoView({ behavior: 'smooth', block: 'center', inline: 'start' });
         }
@@ -114,30 +122,30 @@ import URL_CSS from '../config/index';
   }
 
   EmailsInput.addEventsInput = function(input,multipleEmails) {
-    input.addEventListener('keyup', (event) => {
+    input.addEventListener('keyup', function(event){
       event.preventDefault();
       var value = event.target.value;
       if (value) {
         if (event.keyCode === 13) {
-          this.addEmailsFormatted(value, multipleEmails);
+          EmailsInput.addEmailsFormatted(value, multipleEmails);
           event.target.value = '';
         }
         if (event.keyCode === 91) {
-          this.addEmailsFormatted(value, multipleEmails);
+          EmailsInput.addEmailsFormatted(value, multipleEmails);
           event.target.value = '';
         }
         if (event.keyCode === 188) {
-          this.addEmailsFormatted(value, multipleEmails);
+          EmailsInput.addEmailsFormatted(value, multipleEmails);
           event.target.value = '';
         }
       }
     });
 
-    input.addEventListener('blur', (event) => {
+    input.addEventListener('blur', function(event){
       event.preventDefault();
       var value = event.target.value;
       if (value) {
-        this.addEmailsFormatted(value, multipleEmails);
+        EmailsInput.addEmailsFormatted(value, multipleEmails);
         event.target.value = '';
       }
     });
@@ -162,8 +170,8 @@ import URL_CSS from '../config/index';
     button.innerText = 'Add email';
     var buttonEmails = document.createElement('button');
     buttonEmails.innerText = 'Get emails count';
-    buttonEmails.addEventListener('click', event => EmailsInput.getEmailsCount(event));
-    button.addEventListener('click', event => EmailsInput.addEmail(event));
+    buttonEmails.addEventListener('click', function(event){ EmailsInput.getEmailsCount(event)});
+    button.addEventListener('click', function(event){ EmailsInput.addEmail(event)});
     content.appendChild(paragraph);
     multipleEmails.appendChild(input);
     content.appendChild(multipleEmails);

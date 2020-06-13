@@ -67,6 +67,9 @@
       margin-right: 8px;
       margin-top: 4px;
       outline: none;
+      &::-ms-clear {
+        display: none;
+    }
 
       &::placeholder {
         color: $color-placeholder;
@@ -129,4 +132,5 @@
   }
 
 }
-  
+
+input::-ms-clear { display: none; }
