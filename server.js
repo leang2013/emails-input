@@ -9,5 +9,4 @@ const app = express();
 
 app.listen(port, () => console.log(`Listening on http://${host}:${port}/`));
 
-app.use('/', express.static(path.join(`${__dirname}/demo`)));
 app.use('/', express.static(path.join(`${__dirname}/dist`)));

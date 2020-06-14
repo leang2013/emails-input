@@ -6,7 +6,7 @@ const outputDir = './dist';
 
 module.exports = () => [{
   entry: {
-    es5: './src/ES5.js',
+    es5: './src/js/es5.js',
     es6: './src/ES6.js',
   },
   output: {
@@ -17,21 +17,6 @@ module.exports = () => [{
   devtool: 'eval-source-map',
   module: {
     rules: [
-      {
-        test: /\s5|ES5\.js$/,
-        use: {
-          loader: 'babel-loader',
-          options: {
-            presets: ['es2015'],
-          },
-        },
-      },
-      {
-        test: /\s6|ES6\.js$/,
-        use: {
-          loader: 'babel-loader',
-        },
-      },
       {
         test: /\.(sa|sc|c)ss$/,
         use: [
