@@ -1,5 +1,7 @@
 /* eslint-disable */
 (function (window) {
+
+  'use strict';
  
   function EmailsInput(nodes) {
     EmailsInput.render(nodes);
@@ -62,7 +64,7 @@
     var pills = emails.getElementsByClassName('pill');
     var input = emails.getElementsByTagName('input')[0];
     var lengthPills = pills.length;
-    for (let i = 0; i < lengthPills; i++) {
+    for (var i = 0; i < lengthPills; i++) {
       var text = pills[i].textContent;
       if (text && text !== 'invalid.email') listEmails.push(pills[i]);
     }
@@ -105,7 +107,7 @@
     var lengthEmails = emails.length;
     var element = multipleEmails.getElementsByTagName('input')[0];
     var parent = element.parentNode;
-    for (let i = 0; i < lengthEmails; i++) {
+    for (var i = 0; i < lengthEmails; i++) {
       var emailText = emails[i].trim().toLowerCase();
       if (EmailsInput.checkEmail(emailText)) {
         parent.insertBefore(EmailsInput.createElementEmail(emailText), element);
