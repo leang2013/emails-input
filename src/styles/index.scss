@@ -66,9 +66,7 @@
       line-height: 24px;
       margin-right: 8px;
       outline: none;
-      &::-ms-clear {
-        display: none;
-    }
+      margin-top: 1px;
 
       &::placeholder {
         color: $color-placeholder;
